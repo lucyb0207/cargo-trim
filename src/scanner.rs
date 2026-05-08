@@ -2,11 +2,11 @@ use anyhow::Result;
 use regex::Regex;
 use std::collections::HashSet;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use walkdir::WalkDir;
 
 pub fn scan_package(
-    src_dir: &PathBuf,
+    src_dir: &Path,
 ) -> Result<HashSet<String>> {
     let mut used = HashSet::new();
 
