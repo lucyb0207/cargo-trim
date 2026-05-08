@@ -45,7 +45,17 @@ fn scan_file(
     for pattern in patterns {
         for cap in pattern.captures_iter(&content) {
             if let Some(name) = cap.get(1) {
-                used.insert(name.as_str().to_string());
+                let name = name.as_str();
+
+                if name.starts_with("std")
+                    || name.starts_with("core")
+                    || name.starts_with("crate")
+                    || name.starts_with("self")
+                {
+                        continue;
+                }
+
+                used.insert(name.split("::").next().unwrap().to_string());
             }
         }
     }
